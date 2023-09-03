@@ -3,63 +3,39 @@ package com.oceanknight.mima
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.view.WindowCompat
+import com.oceanknight.mima.ui.MimaEntry
 import com.oceanknight.mima.ui.theme.MimaTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         // 开启边到边
-        WindowCompat.setDecorFitsSystemWindows(window, false)
-
+        enableEdgeToEdge()
+        super.onCreate(savedInstanceState)
         setContent {
-            MimaTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
+            MimaTheme(
+                dynamicColor = true
+            ) {
+                MimaEntry(
+                    windowSizeClass = calculateWindowSizeClass(this)
+                )
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Column {
-        Text(
-            text = "Hello $name!",
-            modifier = modifier
-        )
-        Text(
-            text = "Hello $name!",
-            modifier = modifier
-        )
-        Text(
-            text = "Hello $name!",
-            modifier = modifier
-        )
-    }
-
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MimaTheme {
-        Greeting("Android")
     }
 }
