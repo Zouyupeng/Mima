@@ -2,4 +2,7 @@
     <string name="app_name">Mima</string>
 
     <string name="dash_board">总览</string>
+    <string name="ledger">账本</string>
+    <string name="journal">日记</string>
+    <string name="mine">我的</string>
 </resources>

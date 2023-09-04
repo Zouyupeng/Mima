@@ -7,6 +7,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.oceanknight.mima.ui.navigation.NavigationRoute
@@ -21,7 +22,7 @@ import com.oceanknight.mima.ui.navigation.NavigationType
  * @param [windowSizeClass] 窗口尺寸类
  */
 class MimaAppState(
-    val navController: NavController,
+    val navController: NavHostController,
     val windowSizeClass: WindowSizeClass
 ) {
     val shouldNavBottomBar: Boolean
@@ -44,15 +45,20 @@ class MimaAppState(
             .filter { it.selectedIconId != null && it.unselectedIconId != null }
     }
 
-    val currentDestination: NavDestination?
+    private val currentDestination: NavDestination?
         @Composable get() = navController
             .currentBackStackEntryAsState().value?.destination
 
+    val currentNavDestination: String?
+        @Composable get() = currentDestination?.route
+
     val shouldShowNavigation: Boolean
         @Composable get() = when(currentDestination?.route) {
-            stringResource(id = NavigationRoute.DASH_BOARD.labelId) -> true
+            NavigationRoute.DASH_BOARD.name -> true
             else -> false
         }
+
+
 }
 
 
@@ -60,7 +66,7 @@ class MimaAppState(
 @Composable
 fun rememberMimaAppState(
     windowSizeClass: WindowSizeClass,
-    navController: NavController = rememberNavController(),
+    navController: NavHostController = rememberNavController(),
 ): MimaAppState {
     return remember(
         windowSizeClass,
