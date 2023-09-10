@@ -5,10 +5,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import com.oceanknight.mima.ui.MimaAppState
 import com.oceanknight.mima.ui.navigation.MimaNavBar
@@ -22,7 +24,8 @@ fun MimaScaffold(
     content: @Composable () -> Unit
 ) {
     Scaffold(
-        modifier = modifier,
+        modifier = modifier
+            .statusBarsPadding(),
         bottomBar = {
             if (appState.shouldNavBottomBar) {
                 MimaNavBar(
