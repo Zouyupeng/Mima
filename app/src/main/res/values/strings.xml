@@ -5,4 +5,8 @@
     <string name="ledger">账本</string>
     <string name="journal">日记</string>
     <string name="mine">我的</string>
+
+    <string name="current_ledger">当前账本为: </string>
+    <string name="ledger_select_hint">当前选择账本</string>
+    <string name="switch_ledger_hint">切换账本</string>
 </resources>

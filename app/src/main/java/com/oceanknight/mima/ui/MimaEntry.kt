@@ -31,7 +31,7 @@ fun MimaEntry(
             startDestination = NavigationRoute.DASH_BOARD.name
         ) {
             composable(NavigationRoute.DASH_BOARD.name) {
-                DashBoardScreen()
+                DashBoardScreen(appState.shouldNavBottomBar)
             }
             composable(NavigationRoute.LEDGER.name) {
                 LedgerScreen()
