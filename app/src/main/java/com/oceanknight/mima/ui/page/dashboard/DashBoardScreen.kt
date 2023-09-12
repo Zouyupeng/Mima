@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -39,6 +41,8 @@ fun DashBoardScreen(
                     .fillMaxWidth()
                     .fillMaxHeight(0.1f)
             )
+
+
         }
     }
 
@@ -92,7 +96,7 @@ fun LedgerSelectTopBar(
                 text = "默认账本",
                 fontSize = 28.sp,
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .wrapContentWidth()
                     .basicMarquee()
             )
         }
