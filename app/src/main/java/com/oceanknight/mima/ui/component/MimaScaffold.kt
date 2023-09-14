@@ -24,8 +24,7 @@ fun MimaScaffold(
     content: @Composable () -> Unit
 ) {
     Scaffold(
-        modifier = modifier
-            .statusBarsPadding(),
+        modifier = modifier,
         bottomBar = {
             if (appState.shouldNavBottomBar) {
                 MimaNavBar(

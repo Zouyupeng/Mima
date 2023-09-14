@@ -1,9 +1,11 @@
 package com.oceanknight.mima.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.oceanknight.mima.ui.component.MimaScaffold
@@ -22,26 +24,25 @@ fun MimaEntry(
     windowSizeClass: WindowSizeClass,
     appState: MimaAppState = rememberMimaAppState(windowSizeClass = windowSizeClass)
 ) {
-    MimaScaffold(
-        appState = appState
-    ){
-        NavHost(
-            modifier = Modifier,
-            navController = appState.navController,
-            startDestination = NavigationRoute.DASH_BOARD.name
-        ) {
-            composable(NavigationRoute.DASH_BOARD.name) {
-                DashBoardScreen(appState.shouldNavBottomBar)
-            }
-            composable(NavigationRoute.LEDGER.name) {
-                LedgerScreen()
-            }
-            composable(NavigationRoute.JOURNAL.name) {
-                JournalScreen()
-            }
-            composable(NavigationRoute.MINE.name) {
-                MineScreen()
-            }
+    NavHost(
+        navController = appState.navController,
+        startDestination = NavigationRoute.DASH_BOARD.name,
+    ) {
+        composable(NavigationRoute.DASH_BOARD.name) {
+            DashBoardScreen(
+                appState.shouldNavBottomBar,
+                appState.currentNavDestination ?: "",
+                appState.navController
+            )
+        }
+        composable(NavigationRoute.LEDGER.name) {
+//            LedgerScreen()
+        }
+        composable(NavigationRoute.JOURNAL.name) {
+//            JournalScreen()
+        }
+        composable(NavigationRoute.MINE.name) {
+//            MineScreen()
         }
     }
 }
