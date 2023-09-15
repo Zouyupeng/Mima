@@ -28,7 +28,9 @@ fun MimaNavBar(
             NavigationBarItem(
                 selected = currentNav == destination.name,
                 onClick = {
-                    topLevelNavigateTo(destination.name)
+                    if (currentNav != destination.name) {
+                        topLevelNavigateTo(destination.name)
+                    }
                 },
                 icon = {
                     if (currentNav == destination.name) {
