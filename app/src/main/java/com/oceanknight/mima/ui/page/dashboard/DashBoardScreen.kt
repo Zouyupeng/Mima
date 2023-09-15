@@ -2,26 +2,21 @@ package com.oceanknight.mima.ui.page.dashboard
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -29,10 +24,8 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import androidx.navigation.NavController
 import com.oceanknight.mima.R
 import com.oceanknight.mima.ui.component.MimaScaffold
-import com.oceanknight.mima.ui.navigation.MimaNavBar
 
 /**
  * @author Oceanknight
@@ -43,26 +36,18 @@ import com.oceanknight.mima.ui.navigation.MimaNavBar
 fun DashBoardScreen(
     shouldNavBottomBar: Boolean = true,
     currentNavDestination : String = "",
-    navController: NavController
+    topLevelNavigateTo: (String) -> Unit = {}
 ) {
-    Scaffold(
-        topBar = {
-
-        },
-        bottomBar = {
-            if (shouldNavBottomBar) {
-                MimaNavBar(
-                    currentNav = currentNavDestination,
-                    navController = navController
-                )
-            }
-        },
-        modifier = Modifier.statusBarsPadding(),
-        containerColor = Color.Transparent
-    ) { paddingValues ->
-        Text(text = "123")
-        Spacer(modifier = Modifier.padding(paddingValues))
-
+    MimaScaffold(
+        topLevelNavigateTo = topLevelNavigateTo,
+        shouldNavBottomBar = shouldNavBottomBar,
+        currentNavDestination = currentNavDestination,
+        modifier = Modifier
+            .statusBarsPadding()
+    ) {
+        Column(Modifier.fillMaxSize()) {
+            LedgerSelectTopBar(Modifier.fillMaxWidth().fillMaxHeight(0.1f))
+        }
     }
 }
 

@@ -4,11 +4,14 @@ import androidx.compose.foundation.background
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.oceanknight.mima.ui.component.MimaScaffold
+import com.oceanknight.mima.ui.ext.topLevelNavigateTo
 import com.oceanknight.mima.ui.navigation.NavigationRoute
 import com.oceanknight.mima.ui.page.dashboard.DashBoardScreen
 import com.oceanknight.mima.ui.page.journal.JournalScreen
@@ -32,7 +35,7 @@ fun MimaEntry(
             DashBoardScreen(
                 appState.shouldNavBottomBar,
                 appState.currentNavDestination ?: "",
-                appState.navController
+                appState.navController::topLevelNavigateTo
             )
         }
         composable(NavigationRoute.LEDGER.name) {
@@ -46,3 +49,4 @@ fun MimaEntry(
         }
     }
 }
+

@@ -10,9 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination
-import androidx.navigation.NavGraph.Companion.findStartDestination
 
 @Composable
 fun MimaNavBar(
@@ -20,7 +17,8 @@ fun MimaNavBar(
     topNavRoute: List<NavigationRoute> = enumValues<NavigationRoute>()
         .filter { it.selectedIconId != null && it.unselectedIconId != null },
     currentNav: String,
-    navController: NavController
+//    navController: NavController
+    topLevelNavigateTo: (String) -> Unit
 ) {
     NavigationBar(
         modifier = modifier
@@ -30,14 +28,7 @@ fun MimaNavBar(
             NavigationBarItem(
                 selected = currentNav == destination.name,
                 onClick = {
-                    navController.popBackStack()
-                    navController.navigate(destination.name) {
-                        popUpTo(navController.graph.findStartDestination().id) {
-                            saveState = true
-                        }
-                        launchSingleTop = true
-                        restoreState = true
-                    }
+                    topLevelNavigateTo(destination.name)
                 },
                 icon = {
                     if (currentNav == destination.name) {
