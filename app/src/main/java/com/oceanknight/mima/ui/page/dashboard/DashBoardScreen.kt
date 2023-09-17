@@ -28,6 +28,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.oceanknight.mima.R
 import com.oceanknight.mima.ui.component.MimaScaffold
+import com.oceanknight.mima.ui.navigation.NavigationType
 
 /**
  * @author Oceanknight
@@ -36,13 +37,13 @@ import com.oceanknight.mima.ui.component.MimaScaffold
  */
 @Composable
 fun DashBoardScreen(
-    shouldNavBottomBar: Boolean = true,
+    navType: NavigationType,
     currentNavDestination : String = "",
     topLevelNavigateTo: (String) -> Unit = {}
 ) {
     MimaScaffold(
         topLevelNavigateTo = topLevelNavigateTo,
-        shouldNavBottomBar = shouldNavBottomBar,
+        navType = navType,
         currentNavDestination = currentNavDestination,
         modifier = Modifier
             .statusBarsPadding()

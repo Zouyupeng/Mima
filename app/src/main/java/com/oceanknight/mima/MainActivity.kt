@@ -41,6 +41,7 @@ class MainActivity : ComponentActivity() {
                 dynamicColor = true
             ) {
                 MimaBackground() {
+                    // 观察到我的MIUI上不执行这一步，导航条的背景色会不对
                     TransparentSystemBars()
                     MimaEntry(
                         windowSizeClass = calculateWindowSizeClass(this)

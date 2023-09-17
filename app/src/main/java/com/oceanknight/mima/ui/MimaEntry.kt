@@ -33,19 +33,31 @@ fun MimaEntry(
     ) {
         composable(NavigationRoute.DASH_BOARD.name) {
             DashBoardScreen(
-                appState.shouldNavBottomBar,
+                appState.navType,
                 appState.currentNavDestination ?: "",
                 appState.navController::topLevelNavigateTo
             )
         }
         composable(NavigationRoute.LEDGER.name) {
-//            LedgerScreen()
+            LedgerScreen(
+                appState.navType,
+                appState.currentNavDestination ?: "",
+                appState.navController::topLevelNavigateTo
+            )
         }
         composable(NavigationRoute.JOURNAL.name) {
-//            JournalScreen()
+            JournalScreen(
+                appState.navType,
+                appState.currentNavDestination ?: "",
+                appState.navController::topLevelNavigateTo
+            )
         }
         composable(NavigationRoute.MINE.name) {
-//            MineScreen()
+            MineScreen(
+                appState.navType,
+                appState.currentNavDestination ?: "",
+                appState.navController::topLevelNavigateTo
+            )
         }
     }
 }

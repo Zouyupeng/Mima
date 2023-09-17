@@ -10,15 +10,14 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.oceanknight.mima.ui.navigation.MimaNavBar
+import com.oceanknight.mima.ui.navigation.NavigationType
 
 @OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun MimaScaffold(
     modifier: Modifier = Modifier,
     topBar: @Composable () -> Unit = {},
-    shouldNavBottomBar: Boolean = false,
-    shouldNavRail: Boolean = false,
-    shouldNavDrawer: Boolean = false,
+    navType: NavigationType,
     currentNavDestination: String = "",
     topLevelNavigateTo: (String) -> Unit,
     leftPane: @Composable () -> Unit = {},
@@ -28,7 +27,7 @@ fun MimaScaffold(
     Scaffold(
         modifier = modifier,
         bottomBar = {
-            if (shouldNavBottomBar) {
+            if (navType == NavigationType.BAR) {
                 MimaNavBar(
                     currentNav = currentNavDestination,
                     topLevelNavigateTo = topLevelNavigateTo

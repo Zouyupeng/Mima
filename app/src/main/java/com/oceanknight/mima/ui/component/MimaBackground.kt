@@ -18,7 +18,6 @@ fun MimaBackground(
     modifier : Modifier = Modifier,
     content : @Composable () -> Unit
 ) {
-//    val
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.onPrimary

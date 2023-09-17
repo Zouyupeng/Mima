@@ -1,7 +1,11 @@
 package com.oceanknight.mima.ui.page.journal
 
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import com.oceanknight.mima.ui.component.MimaScaffold
+import com.oceanknight.mima.ui.navigation.NavigationType
 
 /**
  * @author Oceanknight
@@ -9,6 +13,20 @@ import androidx.compose.runtime.Composable
  * @describe
  */
 @Composable
-fun JournalScreen() {
-    Text(text = "日记页ヾ(•ω•`)o")
+fun JournalScreen(
+    navType: NavigationType,
+    currentNavDestination : String = "",
+    topLevelNavigateTo: (String) -> Unit = {}
+) {
+    MimaScaffold(
+        topLevelNavigateTo = topLevelNavigateTo,
+        navType = navType,
+        currentNavDestination = currentNavDestination,
+        modifier = Modifier
+            .statusBarsPadding()
+    ) {
+        Text(text = "日记页ヾ(•ω•`)o")
+    }
+
+
 }
