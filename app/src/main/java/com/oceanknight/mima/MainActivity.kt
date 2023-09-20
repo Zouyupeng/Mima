@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.view.WindowCompat
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.oceanknight.mima.ui.MimaEntry
+import com.oceanknight.mima.ui.component.MimaBackground
 import com.oceanknight.mima.ui.theme.MimaTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -39,10 +40,13 @@ class MainActivity : ComponentActivity() {
             MimaTheme(
                 dynamicColor = true
             ) {
-                TransparentSystemBars()
-                MimaEntry(
-                    windowSizeClass = calculateWindowSizeClass(this)
-                )
+                MimaBackground {
+                    // 不开启这项，观察到在我的MIUI上底部导航条处颜色处理的不正确
+                    TransparentSystemBars()
+                    MimaEntry(
+                        windowSizeClass = calculateWindowSizeClass(this)
+                    )
+                }
             }
         }
     }

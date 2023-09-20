@@ -33,3 +33,9 @@ enum class NavigationRoute(
     )
 }
 
+val NavigationRoute.shouldShowNav: Boolean
+    get() = this == NavigationRoute.DASH_BOARD ||
+            this == NavigationRoute.LEDGER ||
+            this == NavigationRoute.JOURNAL ||
+            this == NavigationRoute.MINE
+

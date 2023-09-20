@@ -1,6 +1,7 @@
 package com.oceanknight.mima.ui.component
 
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,40 +13,43 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.oceanknight.mima.ui.MimaAppState
+import com.oceanknight.mima.ui.ext.topLevelNavigateTo
 import com.oceanknight.mima.ui.navigation.MimaNavBar
 import com.oceanknight.mima.ui.navigation.NavigationRoute
+import com.oceanknight.mima.ui.navigation.NavigationType
+import com.oceanknight.mima.ui.navigation.shouldShowNav
+import com.oceanknight.mima.ui.viewmodel.HomeViewModel
 
-@OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun MimaScaffold(
     modifier: Modifier = Modifier,
     appState: MimaAppState,
-    content: @Composable () -> Unit
+    content: @Composable (PaddingValues) -> Unit
 ) {
+    val homeViewModel: HomeViewModel = viewModel()
+    val currentNav = homeViewModel.currentNavRoute
+
     Scaffold(
         modifier = modifier
             .statusBarsPadding(),
         bottomBar = {
-            if (appState.shouldNavBottomBar) {
+            if (appState.navType == NavigationType.BAR && currentNav.shouldShowNav) {
                 MimaNavBar(
-                    currentNav = appState.currentNavDestination ?: "",
-                    navController = appState.navController
+                    topNavigateTo = appState.navController::topLevelNavigateTo
                 )
             }
         }
     ) { padding ->
-        Row (
-            modifier = Modifier
-                .fillMaxSize()
-                // 系统导航栏与状态栏的padding
-                .consumeWindowInsets(padding)
-        ){
-            if (appState.shouldNavRail) {
+        // TODO: 适配多尺寸屏幕
+        if (appState.navType == NavigationType.RAIL) {
 
-            }
-
-            content()
         }
+        if (appState.navType == NavigationType.DRAWER) {
+
+        }
+        content(padding)
     }
 }

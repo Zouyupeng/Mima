@@ -10,37 +10,31 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination
-import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.oceanknight.mima.ui.viewmodel.HomeViewModel
 
 @Composable
 fun MimaNavBar(
     modifier: Modifier = Modifier,
     topNavRoute: List<NavigationRoute> = enumValues<NavigationRoute>()
         .filter { it.selectedIconId != null && it.unselectedIconId != null },
-    currentNav: String,
-    navController: NavController
+    homeViewModel: HomeViewModel = hiltViewModel(),
+    topNavigateTo: (String) -> Unit = {}
 ) {
     NavigationBar(
         modifier = modifier
     ) {
+        val currentNav = homeViewModel.currentNavRoute
         topNavRoute.forEach{ destination ->
             val label = stringResource(id = destination.labelId)
             NavigationBarItem(
-                selected = currentNav == destination.name,
+                selected = currentNav == destination,
                 onClick = {
-                    navController.popBackStack()
-                    navController.navigate(destination.name) {
-                        popUpTo(navController.graph.findStartDestination().id) {
-                            saveState = true
-                        }
-                        launchSingleTop = true
-                        restoreState = true
-                    }
+                    homeViewModel.setCurrentNavRoute(destination)
+                    topNavigateTo(destination.name)
                 },
                 icon = {
-                    if (currentNav == destination.name) {
+                    if (currentNav == destination) {
                         Icon(
                             modifier = Modifier.size(28.dp),
                             painter = painterResource(id = destination.selectedIconId!!),

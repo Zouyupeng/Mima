@@ -25,13 +25,13 @@ class MimaAppState(
     val navController: NavHostController,
     val windowSizeClass: WindowSizeClass
 ) {
-    val shouldNavBottomBar: Boolean
+    private val shouldNavBottomBar: Boolean
         get() = windowSizeClass.widthSizeClass == WindowWidthSizeClass.Compact
 
-    val shouldNavRail: Boolean
+    private val shouldNavRail: Boolean
         get() = windowSizeClass.widthSizeClass == WindowWidthSizeClass.Medium
 
-    val shouldNavDrawer: Boolean
+    private val shouldNavDrawer: Boolean
         get() = windowSizeClass.widthSizeClass == WindowWidthSizeClass.Expanded
 
     val navType: NavigationType
@@ -45,18 +45,7 @@ class MimaAppState(
             .filter { it.selectedIconId != null && it.unselectedIconId != null }
     }
 
-    private val currentDestination: NavDestination?
-        @Composable get() = navController
-            .currentBackStackEntryAsState().value?.destination
 
-    val currentNavDestination: String?
-        @Composable get() = currentDestination?.route
-
-    val shouldShowNavigation: Boolean
-        @Composable get() = when(currentDestination?.route) {
-            NavigationRoute.DASH_BOARD.name -> true
-            else -> false
-        }
 
 
 }
