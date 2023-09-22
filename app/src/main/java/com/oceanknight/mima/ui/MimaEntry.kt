@@ -24,14 +24,14 @@ fun MimaEntry(
 ) {
     MimaScaffold(
         appState = appState
-    ){
+    ){ padding ->
         NavHost(
             modifier = Modifier,
             navController = appState.navController,
             startDestination = NavigationRoute.DASH_BOARD.name
         ) {
             composable(NavigationRoute.DASH_BOARD.name) {
-                DashBoardScreen()
+                DashBoardScreen(paddingValues = padding)
             }
             composable(NavigationRoute.LEDGER.name) {
                 LedgerScreen()

@@ -5,11 +5,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -34,30 +36,37 @@ import com.oceanknight.mima.R
  */
 @Composable
 fun DashBoardScreen(
-    shouldNavBottomBar: Boolean = true
+    shouldNavBottomBar: Boolean = true,
+    paddingValues: PaddingValues
 ) {
     if (shouldNavBottomBar) {
-        Column() {
-            LedgerSelectTopBar(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(0.1f)
-                    .padding(top = 3.dp, bottom = 3.dp, start = 6.dp, end = 6.dp)
-                    .clip(RoundedCornerShape(13.dp))
-                    .background(MaterialTheme.colorScheme.primaryContainer)
-            )
-
-
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = paddingValues
+        ) {
+            items(
+                count = 200
+            ) {
+                LedgerSelectTopBar(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight(0.1f)
+                        .padding(top = 3.dp, bottom = 3.dp, start = 6.dp, end = 6.dp)
+                        .clip(RoundedCornerShape(13.dp))
+                        .background(MaterialTheme.colorScheme.primaryContainer),
+                    text = it.toString()
+                )
+            }
         }
     }
-
 }
 
 // TODO: 待数据库做好以后修改数据来源
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun LedgerSelectTopBar(
-    modifier : Modifier = Modifier
+    modifier : Modifier = Modifier,
+    text : String = ""
 ) {
     ConstraintLayout(
         modifier = modifier
@@ -98,7 +107,7 @@ fun LedgerSelectTopBar(
 
             // 账本名称实现跑马灯的效果
             Text(
-                text = "默认账本",
+                text = "默认账本$text",
                 fontSize = 28.sp,
                 modifier = Modifier
                     .wrapContentWidth()

@@ -82,4 +82,8 @@ dependencies {
 
     // accompanist
     implementation(libs.accompanist.systemuicontroller)
+
+    // foundation
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.foundation.layout)
 }
