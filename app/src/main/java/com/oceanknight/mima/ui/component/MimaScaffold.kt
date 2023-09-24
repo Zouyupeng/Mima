@@ -24,7 +24,7 @@ fun MimaScaffold(
     Scaffold(
         modifier = modifier,
         bottomBar = {
-            if (appState.navType == NavigationType.BAR && currentNav.shouldShowNav) {
+            if (appState.getNavType() == NavigationType.BAR && currentNav.shouldShowNav) {
                 MimaNavBar(
                     topNavigateTo = appState.navController::topLevelNavigateTo
                 )
@@ -32,10 +32,10 @@ fun MimaScaffold(
         }
     ) { padding ->
         // TODO: 适配多尺寸屏幕
-        if (appState.navType == NavigationType.RAIL) {
+        if (appState.getNavType() == NavigationType.RAIL) {
 
         }
-        if (appState.navType == NavigationType.DRAWER) {
+        if (appState.getNavType() == NavigationType.DRAWER) {
 
         }
         content(padding)

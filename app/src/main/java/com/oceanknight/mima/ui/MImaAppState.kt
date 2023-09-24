@@ -34,19 +34,17 @@ class MimaAppState(
     private val shouldNavDrawer: Boolean
         get() = windowSizeClass.widthSizeClass == WindowWidthSizeClass.Expanded
 
-    val navType: NavigationType
-        get() = if (shouldNavBottomBar) NavigationType.BAR
-                else if (shouldNavRail) NavigationType.RAIL
-                else NavigationType.DRAWER
+    fun getNavType(): NavigationType {
+        return if (shouldNavBottomBar) NavigationType.BAR
+        else if (shouldNavRail) NavigationType.RAIL
+        else NavigationType.DRAWER
+    }
 
     fun getTopNavigationRoute(): List<NavigationRoute> {
         return NavigationRoute
             .values()
             .filter { it.selectedIconId != null && it.unselectedIconId != null }
     }
-
-
-
 
 }
 

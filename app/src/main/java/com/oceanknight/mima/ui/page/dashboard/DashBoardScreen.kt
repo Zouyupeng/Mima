@@ -36,9 +36,10 @@ import com.oceanknight.mima.R
  */
 @Composable
 fun DashBoardScreen(
-    shouldNavBottomBar: Boolean = true,
-    paddingValues: PaddingValues
+    paddingValues: PaddingValues = PaddingValues(0.dp),
+    shouldNavBottomBar: Boolean = true
 ) {
+    // 手机布局
     if (shouldNavBottomBar) {
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
@@ -129,8 +130,5 @@ fun LedgerSelectTopBar(
                 contentDescription = stringResource(id = R.string.switch_ledger_hint),
             )
         }
-
-
-
     }
 }

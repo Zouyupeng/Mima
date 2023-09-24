@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.oceanknight.mima.ui.component.MimaScaffold
 import com.oceanknight.mima.ui.navigation.NavigationRoute
+import com.oceanknight.mima.ui.navigation.NavigationType
 import com.oceanknight.mima.ui.page.dashboard.DashBoardScreen
 import com.oceanknight.mima.ui.page.journal.JournalScreen
 import com.oceanknight.mima.ui.page.ledger.LedgerScreen
@@ -31,7 +32,10 @@ fun MimaEntry(
             startDestination = NavigationRoute.DASH_BOARD.name
         ) {
             composable(NavigationRoute.DASH_BOARD.name) {
-                DashBoardScreen(paddingValues = padding)
+                DashBoardScreen(
+                    shouldNavBottomBar = appState.getNavType() == NavigationType.BAR,
+                    paddingValues = padding
+                )
             }
             composable(NavigationRoute.LEDGER.name) {
                 LedgerScreen()
