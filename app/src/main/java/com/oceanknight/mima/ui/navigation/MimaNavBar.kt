@@ -10,31 +10,27 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.oceanknight.mima.ui.viewmodel.HomeViewModel
 
 @Composable
 fun MimaNavBar(
     modifier: Modifier = Modifier,
     topNavRoute: List<NavigationRoute> = enumValues<NavigationRoute>()
         .filter { it.selectedIconId != null && it.unselectedIconId != null },
-    homeViewModel: HomeViewModel = hiltViewModel(),
+    currentDestination: String ,
     topNavigateTo: (String) -> Unit = {}
 ) {
     NavigationBar(
         modifier = modifier
     ) {
-        val currentNav = homeViewModel.currentNavRoute
         topNavRoute.forEach{ destination ->
             val label = stringResource(id = destination.labelId)
             NavigationBarItem(
-                selected = currentNav == destination,
+                selected = currentDestination == destination.name,
                 onClick = {
-                    homeViewModel.setCurrentNavRoute(destination)
                     topNavigateTo(destination.name)
                 },
                 icon = {
-                    if (currentNav == destination) {
+                    if (currentDestination == destination.name) {
                         Icon(
                             modifier = Modifier.size(28.dp),
                             painter = painterResource(id = destination.selectedIconId!!),

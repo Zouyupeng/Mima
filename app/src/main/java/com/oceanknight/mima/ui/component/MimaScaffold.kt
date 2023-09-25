@@ -4,13 +4,12 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.oceanknight.mima.ui.MimaAppState
+import com.oceanknight.mima.ui.ext.getCurrentDestination
+import com.oceanknight.mima.ui.ext.shouldShowNav
 import com.oceanknight.mima.ui.ext.topLevelNavigateTo
 import com.oceanknight.mima.ui.navigation.MimaNavBar
 import com.oceanknight.mima.ui.navigation.NavigationType
-import com.oceanknight.mima.ui.navigation.shouldShowNav
-import com.oceanknight.mima.ui.viewmodel.HomeViewModel
 
 @Composable
 fun MimaScaffold(
@@ -18,15 +17,13 @@ fun MimaScaffold(
     appState: MimaAppState,
     content: @Composable (PaddingValues) -> Unit
 ) {
-    val homeViewModel: HomeViewModel = viewModel()
-    val currentNav = homeViewModel.currentNavRoute
-
     Scaffold(
         modifier = modifier,
         bottomBar = {
-            if (appState.getNavType() == NavigationType.BAR && currentNav.shouldShowNav) {
+            if (appState.getNavType() == NavigationType.BAR && appState.navController.getCurrentDestination().shouldShowNav) {
                 MimaNavBar(
-                    topNavigateTo = appState.navController::topLevelNavigateTo
+                    topNavigateTo = appState.navController::topLevelNavigateTo,
+                    currentDestination = appState.navController.getCurrentDestination()
                 )
             }
         }
