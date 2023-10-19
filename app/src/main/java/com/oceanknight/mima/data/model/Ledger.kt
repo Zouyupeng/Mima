@@ -16,7 +16,8 @@ import androidx.room.PrimaryKey
         entity = Currency::class,
         parentColumns = ["id"],
         childColumns = ["default_currency_id"],
-        onUpdate = ForeignKey.SET_DEFAULT
+        onUpdate = ForeignKey.CASCADE,
+        onDelete = ForeignKey.SET_DEFAULT
     )]
 )
 data class Ledger(

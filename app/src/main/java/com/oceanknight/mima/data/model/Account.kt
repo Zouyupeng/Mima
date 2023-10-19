@@ -18,17 +18,20 @@ import androidx.room.PrimaryKey
         ForeignKey(
             entity = Ledger::class,
             parentColumns = ["id"],
-            childColumns = [""]
+            childColumns = ["parent_ledger_id"],
+            onUpdate = ForeignKey.CASCADE,
         ),
         ForeignKey(
             entity = Account::class,
             parentColumns = ["id"],
-            childColumns = ["parent_account_id"]
+            childColumns = ["parent_account_id"],
+            onUpdate = ForeignKey.CASCADE,
         ),
         ForeignKey(
             entity = Currency::class,
             parentColumns = ["id"],
-            childColumns = ["ledger_id"]
+            childColumns = ["ledger_id"],
+            onUpdate = ForeignKey.CASCADE,
         )
     ]
 )
