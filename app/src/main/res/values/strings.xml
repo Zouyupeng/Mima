@@ -9,4 +9,21 @@
     <string name="current_ledger">当前账本为: </string>
     <string name="ledger_select_hint">当前选择账本</string>
     <string name="switch_ledger_hint">切换账本</string>
+
+    <string name="welcome">welcome！</string>
+
+
+
+    <string name="monday">星期一</string>
+    <string name="tuesday">星期二</string>
+    <string name="wednesday">星期三</string>
+    <string name="thursday">星期四</string>
+    <string name="friday">星期五</string>
+    <string name="saturday">星期六</string>
+    <string name="sunday">星期日</string>
+    <string name="something_wrong">出错了</string>
+
+    <string name="image_des_avatar">头像</string>
+    <string name="image_des_dashboard_menu">仪表盘菜单</string>
+
 </resources>

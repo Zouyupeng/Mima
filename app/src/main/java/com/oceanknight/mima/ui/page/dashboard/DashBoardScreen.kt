@@ -2,20 +2,17 @@ package com.oceanknight.mima.ui.page.dashboard
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -28,6 +25,9 @@ import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.oceanknight.mima.R
+import com.oceanknight.mima.ui.component.HomePagePersonalCard
+import com.oceanknight.mima.ui.component.HomePagePersonalCardBackground
+import com.oceanknight.mima.ui.ext.sidesPadding
 
 /**
  * @author Oceanknight
@@ -41,24 +41,12 @@ fun DashBoardScreen(
 ) {
     // 手机布局
     if (shouldNavBottomBar) {
-        LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            contentPadding = paddingValues
-        ) {
-            items(
-                count = 200
-            ) {
-                LedgerSelectTopBar(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight(0.1f)
-                        .padding(top = 3.dp, bottom = 3.dp, start = 6.dp, end = 6.dp)
-                        .clip(RoundedCornerShape(13.dp))
-                        .background(MaterialTheme.colorScheme.primaryContainer),
-                    text = it.toString()
-                )
-            }
-        }
+        HomePagePersonalCard(
+            modifier = Modifier
+                .sidesPadding()
+                .padding(top = paddingValues.calculateTopPadding())
+                .fillMaxWidth(),
+        )
     }
 }
 
@@ -91,7 +79,6 @@ fun LedgerSelectTopBar(
                     bottom.linkTo(parent.bottom)
                 }
                 .fillMaxHeight()
-
         )
         
         Column(
