@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ChainStyle
@@ -27,6 +28,8 @@ import androidx.constraintlayout.compose.Dimension
 import com.oceanknight.mima.R
 import com.oceanknight.mima.ui.component.HomePagePersonalCard
 import com.oceanknight.mima.ui.component.HomePagePersonalCardBackground
+import com.oceanknight.mima.ui.component.SelectLedgerCard
+import com.oceanknight.mima.ui.ext.paddingTop
 import com.oceanknight.mima.ui.ext.sidesPadding
 
 /**
@@ -41,12 +44,21 @@ fun DashBoardScreen(
 ) {
     // 手机布局
     if (shouldNavBottomBar) {
-        HomePagePersonalCard(
-            modifier = Modifier
-                .sidesPadding()
-                .padding(top = paddingValues.calculateTopPadding())
-                .fillMaxWidth(),
-        )
+        Column {
+            HomePagePersonalCard(
+                modifier = Modifier
+                    .sidesPadding()
+                    .padding(top = paddingValues.calculateTopPadding())
+                    .fillMaxWidth(),
+            )
+
+            SelectLedgerCard(
+                modifier = Modifier
+                    .sidesPadding()
+                    .paddingTop()
+            )
+        }
+
     }
 }
 
@@ -118,4 +130,10 @@ fun LedgerSelectTopBar(
             )
         }
     }
+}
+
+@Preview
+@Composable
+fun DashBoardScreenPrev() {
+    DashBoardScreen()
 }

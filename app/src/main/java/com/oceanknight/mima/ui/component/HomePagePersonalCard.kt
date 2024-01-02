@@ -55,6 +55,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.oceanknight.mima.R
 import com.oceanknight.mima.data.util.DateUtil
+import com.oceanknight.mima.ui.ext.clipRoundedCorner
 import kotlinx.coroutines.delay
 
 /**
@@ -236,7 +237,7 @@ fun HomePagePersonalCardBackground(
     Card(
         modifier = modifier
             .height(cardHeight)
-            .clip(RoundedCornerShape(15.dp)),
+            .clipRoundedCorner(),
         colors = cardColor
     ) {
         Canvas(modifier = Modifier
