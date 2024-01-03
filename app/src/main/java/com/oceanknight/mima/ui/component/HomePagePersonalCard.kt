@@ -3,24 +3,23 @@ package com.oceanknight.mima.ui.component
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.basicMarquee
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
@@ -34,11 +33,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
@@ -46,11 +45,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.oceanknight.mima.R
@@ -94,7 +93,7 @@ fun HomePagePersonalCard(
             visible = visibility,
             enter = fadeIn() + slideInHorizontally { fullHeight -> fullHeight }
         ) {
-            cardBackgroundColorContent(
+            CardBackgroundColorContent(
                 modifier = Modifier.fillMaxWidth(),
                 cardHeight = cardHeight,
                 onMenuClick = onMenuClick
@@ -103,9 +102,8 @@ fun HomePagePersonalCard(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun cardBackgroundColorContent(
+fun CardBackgroundColorContent(
     modifier: Modifier = Modifier,
     cardHeight: Dp = 170.dp,
     onMenuClick: () -> Unit = {}
@@ -180,33 +178,42 @@ fun cardBackgroundColorContent(
                     start.linkTo(avatarRef.end)
                 },
             text = stringResource(id = R.string.welcome),
-            fontSize = 25.sp,
+            fontSize = 20.sp,
             color = Color.DarkGray,
             fontStyle = FontStyle.Italic
         )
+        
+        val userNameEndLine = createGuidelineFromEnd(0f)
 
         // TODO: 之后用真实设置的用户名搞
-        Text(
-            modifier = Modifier
-                .basicMarquee()
-                .constrainAs(userNameRef) {
-                    top.linkTo(welcomeRef.bottom)
-                    bottom.linkTo(avatarRef.bottom, 10.dp)
-                    start.linkTo(welcomeRef.start)
-                    end.linkTo(parent.end)
-                    width = Dimension.fillToConstraints
-                    height = Dimension.fillToConstraints
-                },
-            text = "Oceanknight",
-            textAlign = TextAlign.Start,
-            fontSize = 40.sp,
-            fontWeight = FontWeight.Bold
-        )
+        Box(modifier = Modifier
+            .constrainAs(userNameRef) {
+                top.linkTo(welcomeRef.bottom, 5.dp)
+                bottom.linkTo(avatarRef.bottom, 10.dp)
+                start.linkTo(welcomeRef.start)
+                end.linkTo(userNameEndLine)
+                width = Dimension.fillToConstraints
+                height = Dimension.fillToConstraints
+            }) {
+            Text(
+                text = "Oceanknight",
+                textAlign = TextAlign.Center,
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 2,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.align(Alignment.CenterStart)
+            )
+        }
 
-        IconButton(
+
+        Button(
+            shape = CircleShape,
+            contentPadding = PaddingValues(15.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
             modifier = Modifier
                 .size(cardHeight * 2 / 5)
-                .constrainAs(menuButtonRef){
+                .constrainAs(menuButtonRef) {
                     top.linkTo(parent.top)
                     end.linkTo(parent.end)
                 },
@@ -218,6 +225,8 @@ fun cardBackgroundColorContent(
                 contentDescription = stringResource(id = R.string.image_des_dashboard_menu)
             )
         }
+
+
 
     }
 }
@@ -316,8 +325,8 @@ fun HomePagePersonalCardBackground(
 
 @Preview
 @Composable
-fun cardBackgroundColorContentPreview() {
-    cardBackgroundColorContent(
+fun CardBackgroundColorContentPreview() {
+    CardBackgroundColorContent(
         modifier = Modifier.fillMaxWidth()
     )
 }

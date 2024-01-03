@@ -24,6 +24,7 @@
     <string name="something_wrong">出错了</string>
 
     <string name="image_des_avatar">头像</string>
+    <string name="image_des_switch_ledger">切换账本</string>
     <string name="image_des_dashboard_menu">仪表盘菜单</string>
 
 </resources>
