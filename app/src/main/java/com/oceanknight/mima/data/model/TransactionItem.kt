@@ -18,14 +18,14 @@ import androidx.room.PrimaryKey
     foreignKeys = [
         ForeignKey(
             entity = Currency::class,
-            parentColumns = ["id"],
+            parentColumns = ["currency_id"],
             childColumns = ["origin_currency_id", "conversion_currency_id"],
             onUpdate = ForeignKey.CASCADE,
             onDelete = ForeignKey.SET_DEFAULT
         ),
         ForeignKey(
             entity = Account::class,
-            parentColumns = ["id"],
+            parentColumns = ["account_id"],
             childColumns = ["account_id"],
             onUpdate = ForeignKey.CASCADE,
             onDelete = ForeignKey.SET_NULL

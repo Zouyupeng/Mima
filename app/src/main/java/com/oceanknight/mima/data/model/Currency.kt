@@ -12,11 +12,12 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "currency")
 data class Currency(
     @PrimaryKey(autoGenerate = true)
-    var id: Int? = null,
+    @ColumnInfo(name = "currency_id")
+    var currencyId: Int? = null,
 
     @ColumnInfo(name = "currency_name")
     var currencyName: String,
 
     @ColumnInfo(name = "currency_icon")
-    var currencyId: String
+    var currencyIcon: String
 )

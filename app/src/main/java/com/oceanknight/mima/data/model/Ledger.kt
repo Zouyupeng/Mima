@@ -14,7 +14,7 @@ import androidx.room.PrimaryKey
     tableName = "ledger",
     foreignKeys = [ForeignKey(
         entity = Currency::class,
-        parentColumns = ["id"],
+        parentColumns = ["currency_id"],
         childColumns = ["default_currency_id"],
         onUpdate = ForeignKey.CASCADE,
         onDelete = ForeignKey.SET_DEFAULT
