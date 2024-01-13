@@ -11,26 +11,21 @@ import androidx.room.PrimaryKey
  * @describe 交易记录和tag的中间表
  */
  @Entity(
-     tableName = "transactionTagLink",
+     primaryKeys = ["transaction_id", "tag_id"],
      foreignKeys = [
          ForeignKey(
              entity = Transaction::class,
-             parentColumns = ["id"],
+             parentColumns = ["transaction_id"],
              childColumns = ["transaction_id"],
-             onDelete = ForeignKey.SET_NULL
          ),
          ForeignKey(
              entity = Tag::class,
-             parentColumns = ["id"],
+             parentColumns = ["tag_id"],
              childColumns = ["tag_id"],
-             onDelete = ForeignKey.SET_NULL
          ),
      ]
  )
-data class TransactionTagLink(
-    @PrimaryKey(autoGenerate = true)
-    var id: Int? = null,
-
+data class TransactionTag(
     @ColumnInfo(name = "transaction_id")
     var transactionId: Int,
 

@@ -14,14 +14,14 @@ import androidx.room.PrimaryKey
  *          一条交易记录的所有交易分录必须配平
  */
 @Entity(
-    tableName = "transactionItem",
+    tableName = "transaction-item",
     foreignKeys = [
         ForeignKey(
             entity = Currency::class,
             parentColumns = ["currency_id"],
             childColumns = ["origin_currency_id", "conversion_currency_id"],
             onUpdate = ForeignKey.CASCADE,
-            onDelete = ForeignKey.SET_DEFAULT
+            onDelete = ForeignKey.SET_NULL
         ),
         ForeignKey(
             entity = Account::class,
@@ -32,15 +32,17 @@ import androidx.room.PrimaryKey
         ),
         ForeignKey(
             entity = Transaction::class,
-            parentColumns = ["id"],
+            parentColumns = ["transaction_id"],
             childColumns = ["transaction_id"],
-            onDelete = ForeignKey.SET_NULL
+            onUpdate = ForeignKey.CASCADE,
+            onDelete = ForeignKey.CASCADE,
         ),
     ]
 )
 data class TransactionItem(
     @PrimaryKey(autoGenerate = true)
-    var id: Int? = null,
+    @ColumnInfo(name = "transaction_item_id")
+    var transactionItemId: Int? = null,
 
     @ColumnInfo(name = "transaction_id")
     var transactionId: Int,
@@ -55,11 +57,9 @@ data class TransactionItem(
     var originCurrencyValue: Int,
 
     // 货币换算 以应对beancount语法中的 @ 或者 @@
-    @ColumnInfo(name = "conversion_currency_id", defaultValue = "NULL")
+    @ColumnInfo(name = "conversion_currency_id", defaultValue = "")
     var conversionCurrencyId: Int?,
 
-    @ColumnInfo(name = "conversion_currency_value", defaultValue = "NULL")
-    var conversionCurrencyValue: Int?,
-
-
+    @ColumnInfo(name = "conversion_currency_value", defaultValue = "")
+    var conversionCurrencyValue: Int?
 )

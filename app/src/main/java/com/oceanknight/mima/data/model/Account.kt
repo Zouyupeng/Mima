@@ -17,7 +17,7 @@ import androidx.room.PrimaryKey
     foreignKeys = [
         ForeignKey(
             entity = Ledger::class,
-            parentColumns = ["id"],
+            parentColumns = ["ledger_id"],
             childColumns = ["parent_ledger_id"],
             onUpdate = ForeignKey.CASCADE,
         ),

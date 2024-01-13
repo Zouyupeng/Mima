@@ -17,21 +17,19 @@ import androidx.room.PrimaryKey
         parentColumns = ["currency_id"],
         childColumns = ["default_currency_id"],
         onUpdate = ForeignKey.CASCADE,
-        onDelete = ForeignKey.SET_DEFAULT
+        onDelete = ForeignKey.SET_NULL,
     )]
 )
 data class Ledger(
     @PrimaryKey(autoGenerate = true)
-    var id: Int? = null,
+    @ColumnInfo(name = "ledger_id")
+    var ledgerId: Int? = null,
 
     @ColumnInfo(name = "ledger_name")
     var ledgerName: String,
 
     // TODO: 整好图片存储以后设置一个图片路径
-    @ColumnInfo(
-        name = "default_currency_id",
-        defaultValue = ""
-    )
-    var defaultCurrencyId: String
+    @ColumnInfo(name = "default_currency_id")
+    var defaultCurrencyId: String?
 
 )

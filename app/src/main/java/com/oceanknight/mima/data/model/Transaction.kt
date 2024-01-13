@@ -14,10 +14,11 @@ import androidx.room.PrimaryKey
 )
 data class Transaction(
     @PrimaryKey(autoGenerate = true)
-    var id: Int? = null,
+    @ColumnInfo(name = "transaction_id")
+    var transactionId: Int? = null,
 
     // 收款方 可空
-    @ColumnInfo(name = "recipient", defaultValue = "NULL")
+    @ColumnInfo(name = "recipient", defaultValue = "")
     var recipient: String?,
 
     // 备注如果标记balance，则记录为平账操作（仍在思考）
