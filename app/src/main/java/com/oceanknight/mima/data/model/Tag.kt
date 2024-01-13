@@ -21,7 +21,7 @@ import androidx.room.PrimaryKey
 )
 data class Tag(
     @PrimaryKey(autoGenerate = true)
-    var id: Int = 0,
+    var id: Int? = null,
 
     @ColumnInfo(name = "tag_name", defaultValue = "")
     var tag: String,

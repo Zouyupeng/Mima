@@ -22,7 +22,7 @@ import androidx.room.PrimaryKey
 )
 data class Ledger(
     @PrimaryKey(autoGenerate = true)
-    var id: Int = 0,
+    var id: Int? = null,
 
     @ColumnInfo(name = "ledger_name")
     var ledgerName: String,

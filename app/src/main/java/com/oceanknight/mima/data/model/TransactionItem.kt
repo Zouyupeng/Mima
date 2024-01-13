@@ -40,7 +40,7 @@ import androidx.room.PrimaryKey
 )
 data class TransactionItem(
     @PrimaryKey(autoGenerate = true)
-    var id: Int,
+    var id: Int? = null,
 
     @ColumnInfo(name = "transaction_id")
     var transactionId: Int,

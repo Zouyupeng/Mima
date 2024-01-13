@@ -37,7 +37,7 @@ import androidx.room.PrimaryKey
 )
 data class Account(
     @PrimaryKey(autoGenerate = true)
-    var id: Int = 0,
+    var id: Int? = null,
 
     @ColumnInfo(name = "account_name")
     var accountName: String,

@@ -12,7 +12,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "currency")
 data class Currency(
     @PrimaryKey(autoGenerate = true)
-    var id: Int = 0,
+    var id: Int? = null,
 
     @ColumnInfo(name = "currency_name")
     var currencyName: String,

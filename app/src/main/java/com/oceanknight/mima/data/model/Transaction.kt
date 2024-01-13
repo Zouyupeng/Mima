@@ -14,7 +14,7 @@ import androidx.room.PrimaryKey
 )
 data class Transaction(
     @PrimaryKey(autoGenerate = true)
-    var id: Int = 0,
+    var id: Int? = null,
 
     // 收款方 可空
     @ColumnInfo(name = "recipient", defaultValue = "NULL")
