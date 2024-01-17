@@ -1,4 +1,4 @@
-package com.oceanknight.mima.data.model
+package com.oceanknight.mima.database.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -17,21 +17,21 @@ import androidx.room.PrimaryKey
     tableName = "transaction-item",
     foreignKeys = [
         ForeignKey(
-            entity = Currency::class,
+            entity = CurrencyEntity::class,
             parentColumns = ["currency_id"],
             childColumns = ["origin_currency_id", "conversion_currency_id"],
             onUpdate = ForeignKey.CASCADE,
             onDelete = ForeignKey.SET_NULL
         ),
         ForeignKey(
-            entity = Account::class,
+            entity = AccountEntity::class,
             parentColumns = ["account_id"],
             childColumns = ["account_id"],
             onUpdate = ForeignKey.CASCADE,
             onDelete = ForeignKey.SET_NULL
         ),
         ForeignKey(
-            entity = Transaction::class,
+            entity = TransactionEntity::class,
             parentColumns = ["transaction_id"],
             childColumns = ["transaction_id"],
             onUpdate = ForeignKey.CASCADE,
@@ -39,7 +39,7 @@ import androidx.room.PrimaryKey
         ),
     ]
 )
-data class TransactionItem(
+data class TransactionItemEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "transaction_item_id")
     var transactionItemId: Int? = null,

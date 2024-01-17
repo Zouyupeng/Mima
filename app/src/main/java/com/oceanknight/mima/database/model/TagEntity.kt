@@ -1,4 +1,4 @@
-package com.oceanknight.mima.data.model
+package com.oceanknight.mima.database.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -19,7 +19,7 @@ import androidx.room.PrimaryKey
         )
     ]
 )
-data class Tag(
+data class TagEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "tag_id")
     var tagId: Int? = null,

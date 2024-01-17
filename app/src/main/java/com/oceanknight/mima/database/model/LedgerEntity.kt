@@ -1,4 +1,4 @@
-package com.oceanknight.mima.data.model
+package com.oceanknight.mima.database.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -13,14 +13,14 @@ import androidx.room.PrimaryKey
 @Entity(
     tableName = "ledger",
     foreignKeys = [ForeignKey(
-        entity = Currency::class,
+        entity = CurrencyEntity::class,
         parentColumns = ["currency_id"],
         childColumns = ["default_currency_id"],
         onUpdate = ForeignKey.CASCADE,
         onDelete = ForeignKey.SET_NULL,
     )]
 )
-data class Ledger(
+data class LedgerEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "ledger_id")
     var ledgerId: Int? = null,

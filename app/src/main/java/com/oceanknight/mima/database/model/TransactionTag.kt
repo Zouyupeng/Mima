@@ -1,9 +1,8 @@
-package com.oceanknight.mima.data.model
+package com.oceanknight.mima.database.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
 
 /**
  * @author Oceanknight
@@ -14,12 +13,12 @@ import androidx.room.PrimaryKey
      primaryKeys = ["transaction_id", "tag_id"],
      foreignKeys = [
          ForeignKey(
-             entity = Transaction::class,
+             entity = TransactionEntity::class,
              parentColumns = ["transaction_id"],
              childColumns = ["transaction_id"],
          ),
          ForeignKey(
-             entity = Tag::class,
+             entity = TagEntity::class,
              parentColumns = ["tag_id"],
              childColumns = ["tag_id"],
          ),

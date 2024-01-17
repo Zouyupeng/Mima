@@ -1,4 +1,4 @@
-package com.oceanknight.mima.data.model
+package com.oceanknight.mima.database.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -16,20 +16,20 @@ import androidx.room.PrimaryKey
     tableName = "account",
     foreignKeys = [
         ForeignKey(
-            entity = Ledger::class,
+            entity = LedgerEntity::class,
             parentColumns = ["ledger_id"],
             childColumns = ["parent_ledger_id"],
             onUpdate = ForeignKey.CASCADE,
         ),
         ForeignKey(
-            entity = Account::class,
+            entity = AccountEntity::class,
             parentColumns = ["account_id"],
             childColumns = ["parent_account_id"],
             onUpdate = ForeignKey.CASCADE,
         ),
     ]
 )
-data class Account(
+data class AccountEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "account_id")
     var accountId: Int? = null,

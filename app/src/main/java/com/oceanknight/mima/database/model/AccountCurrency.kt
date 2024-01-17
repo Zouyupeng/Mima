@@ -1,4 +1,4 @@
-package com.oceanknight.mima.data.model
+package com.oceanknight.mima.database.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -14,12 +14,12 @@ import androidx.room.ForeignKey
     primaryKeys = ["account_id", "currency_id"],
     foreignKeys = [
         ForeignKey(
-            entity = Account::class,
+            entity = AccountEntity::class,
             parentColumns = ["account_id"],
             childColumns = ["account_id"],
         ),
         ForeignKey(
-            entity = Currency::class,
+            entity = CurrencyEntity::class,
             parentColumns = ["currency_id"],
             childColumns = ["currency_id"],
         ),

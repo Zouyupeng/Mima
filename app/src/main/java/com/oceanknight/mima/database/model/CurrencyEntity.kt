@@ -1,4 +1,4 @@
-package com.oceanknight.mima.data.model
+package com.oceanknight.mima.database.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey
  * @describe 货币表
  */
 @Entity(tableName = "currency")
-data class Currency(
+data class CurrencyEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "currency_id")
     var currencyId: Int? = null,
